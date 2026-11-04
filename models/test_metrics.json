@@ -1,0 +1,167 @@
+{
+  "score_threshold": 0.95,
+  "mask_iou": 0.963,
+  "mAP_50": 1.0,
+  "mAP_50_95": 0.9693,
+  "precision": 1.0,
+  "recall": 1.0,
+  "images": [
+    {
+      "file": "6mm_bolt_016.png",
+      "score": 0.9996,
+      "iou": 0.9633
+    },
+    {
+      "file": "6mm_bolt_017.png",
+      "score": 0.9997,
+      "iou": 0.9473
+    },
+    {
+      "file": "7mm_bolt_010.png",
+      "score": 0.9995,
+      "iou": 0.9681
+    },
+    {
+      "file": "7mm_bolt_019.png",
+      "score": 0.9996,
+      "iou": 0.9674
+    },
+    {
+      "file": "8mm_bolt_005.png",
+      "score": 0.9994,
+      "iou": 0.9719
+    },
+    {
+      "file": "8mm_bolt_019.png",
+      "score": 0.9993,
+      "iou": 0.9604
+    }
+  ],
+  "split": "test",
+  "checkpoint_epoch": 11,
+  "checkpoint_val_mask_iou_at_0.5": 0.9662,
+  "images_in_split": 6,
+  "device": "NVIDIA GeForce RTX 3070 Laptop GPU",
+  "torch": "2.6.0+cu124",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.4672,
+      "val_mask_iou_at_0.5": 0.9231,
+      "lr": 0.005,
+      "seconds": 21.8
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.12,
+      "val_mask_iou_at_0.5": 0.9556,
+      "lr": 0.005,
+      "seconds": 19.0
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.0906,
+      "val_mask_iou_at_0.5": 0.9615,
+      "lr": 0.005,
+      "seconds": 18.4
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.0785,
+      "val_mask_iou_at_0.5": 0.9629,
+      "lr": 0.005,
+      "seconds": 18.9
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.0719,
+      "val_mask_iou_at_0.5": 0.9586,
+      "lr": 0.005,
+      "seconds": 18.8
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.0718,
+      "val_mask_iou_at_0.5": 0.9621,
+      "lr": 0.005,
+      "seconds": 19.6
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.0697,
+      "val_mask_iou_at_0.5": 0.9621,
+      "lr": 0.005,
+      "seconds": 19.5
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.0668,
+      "val_mask_iou_at_0.5": 0.9641,
+      "lr": 0.0005,
+      "seconds": 18.7
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.0618,
+      "val_mask_iou_at_0.5": 0.9655,
+      "lr": 0.0005,
+      "seconds": 19.1
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.0594,
+      "val_mask_iou_at_0.5": 0.9652,
+      "lr": 0.0005,
+      "seconds": 18.8
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.0594,
+      "val_mask_iou_at_0.5": 0.9662,
+      "lr": 0.0005,
+      "seconds": 18.6
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.0578,
+      "val_mask_iou_at_0.5": 0.966,
+      "lr": 0.0005,
+      "seconds": 19.2
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.0579,
+      "val_mask_iou_at_0.5": 0.9654,
+      "lr": 0.0005,
+      "seconds": 19.6
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.0568,
+      "val_mask_iou_at_0.5": 0.9653,
+      "lr": 0.0005,
+      "seconds": 19.3
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.0568,
+      "val_mask_iou_at_0.5": 0.9659,
+      "lr": 0.0005,
+      "seconds": 19.0
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.0566,
+      "val_mask_iou_at_0.5": 0.966,
+      "lr": 5e-05,
+      "seconds": 18.9
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.0573,
+      "val_mask_iou_at_0.5": 0.966,
+      "lr": 5e-05,
+      "seconds": 18.7
+    }
+  ]
+}

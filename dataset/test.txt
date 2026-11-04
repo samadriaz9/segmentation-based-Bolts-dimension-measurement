@@ -1,0 +1,6 @@
+images/6mm_bolt_016.png
+images/6mm_bolt_017.png
+images/7mm_bolt_010.png
+images/7mm_bolt_019.png
+images/8mm_bolt_005.png
+images/8mm_bolt_019.png

@@ -1,0 +1,16 @@
+# Print the calibration board
+
+Print one PDF at **100% scale** (actual size). Turn off "fit to page" and turn off "shrink to printable area".
+
+| File | Square | Marker | Grid | Pattern size |
+|---|---|---|---|---|
+| charuco_2.0mm.pdf | 2.0 mm nominal | 1.4 mm nominal | 20 × 14 | 40 mm × 28 mm |
+| charuco_3.0mm.pdf | 3.0 mm nominal | 2.1 mm nominal | 14 × 10 | 42 mm × 30 mm |
+
+Both use OpenCV 5.0.0, dictionary DICT_4X4_250, legacy pattern off. An 8 mm white margin is around the pattern so the printer does not clip a marker.
+
+1. Print both PDFs. A laser printer on matte paper holds these small squares better than an inkjet.
+2. Tape each sheet flat to a rigid plate. The plate must not bend.
+3. Lock the microscope only after a bolt and the washer both fit in the frame with margin.
+4. Hold each board under that locked view. Keep the board where at least six markers are sharp and fully inside the frame. Prefer the larger squares when both pass.
+5. Measure one square, corner to corner along one side, with the vernier caliper. Measure a plain square, not the marker inside it. Write that reading into `square_length_mm_measured` in the matching JSON file. Calibration uses this reading. The nominal size in the file is only the drawing size.

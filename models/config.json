@@ -1,0 +1,22 @@
+{
+  "model": "torchvision Mask R-CNN ResNet-50 FPN",
+  "pretrained": "COCO MaskRCNN_ResNet50_FPN_Weights.DEFAULT",
+  "why": "The assessment forbids Ultralytics YOLO and Roboflow. This is a COCO-pretrained instance segmentation model, fine-tuned on the bolt training images.",
+  "class_id": 1,
+  "class_name": "Bolt",
+  "seed": 42,
+  "batch_size": 2,
+  "learning_rate": 0.005,
+  "momentum": 0.9,
+  "weight_decay": 0.0005,
+  "step_size": 8,
+  "gamma": 0.1,
+  "max_epochs": 24,
+  "checkpoint_rule": "highest validation mean mask IoU at score 0.5",
+  "score_threshold_rule": "chosen on validation to maximize mean mask IoU, then frozen",
+  "test_split": "scored once after checkpoint and threshold were frozen",
+  "weights": "models/maskrcnn_bolt.pth",
+  "weights_sha256": "f89d6a8a3e9249c23e95732cf942faefc1a87faf09ef7b06f2fe72c38f5a8ee8",
+  "torch": "2.6.0+cu124",
+  "torchvision": "0.21.0+cu124"
+}

@@ -1,0 +1,10 @@
+# Product photo of the microscope. Not a captured dataset image.
+5dee3593-f3a1-44f0-85a4-600cc87a4372.avif
+
+__pycache__/
+.venv/
+*.pt
+*.pth
+runs/
+*.mp4
+.cursor/

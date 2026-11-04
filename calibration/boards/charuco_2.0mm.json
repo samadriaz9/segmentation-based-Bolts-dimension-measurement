@@ -1,0 +1,13 @@
+{
+  "type": "charuco",
+  "opencv": "5.0.0",
+  "dictionary": "DICT_4X4_250",
+  "squares_x": 20,
+  "squares_y": 14,
+  "square_length_mm_nominal": 2.0,
+  "marker_length_mm_nominal": 1.4,
+  "legacy_pattern": false,
+  "print_dpi": 300,
+  "margin_mm": 8.0,
+  "square_length_mm_measured": null
+}
