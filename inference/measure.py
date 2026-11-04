@@ -190,8 +190,8 @@ class Measurer:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = load_model(self.device)
 
-    def measure_bgr(self, raw):
-        image = undistort(raw, self.camera_matrix, self.dist_coeffs)
+    def measure_bgr(self, raw, apply_undistort=True):
+        image = undistort(raw, self.camera_matrix, self.dist_coeffs) if apply_undistort else raw
         found = find_bolt(self.model, image, self.device)
         if found is None:
             return {"ok": False, "reason": "object not found", "undistorted": image}

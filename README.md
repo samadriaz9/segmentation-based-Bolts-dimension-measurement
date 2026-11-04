@@ -4,7 +4,7 @@ Photograph a small bolt with a digital microscope and report its length and diam
 
 Recording: https://youtu.be/huN9wxi7zYc
 
-Status: plan and calibration boards only. Capture and training have not started.
+Status: calibration, 72 labelled images, a fine-tuned Mask R-CNN, and a measure command are in the repository. The caliper comparison is in [Objectives](docs/Objectives.md). Mean absolute error on the fully visible held-out photos is 0.2769 mm, above the 0.25 mm target.
 
 ## Hardware
 
@@ -17,6 +17,25 @@ Status: plan and calibration boards only. Capture and training have not started.
 - [Plan](docs/Plan.md)
 - [Objectives](docs/Objectives.md)
 - [Definition of Done](docs/Definition_of_Done.md)
+
+## Dataset
+
+72 microscope photos, 1280×720, 24 each of the 6 mm, 7 mm, and 8 mm bolts. Labels are polygon masks of the bolt. Split lists: 51 train, 15 validation, 6 test.
+
+## Run
+
+```text
+python calibration/calibrate.py
+python models/train_maskrcnn.py
+python inference/measure.py path\to\photo.png
+python measurement/accuracy.py
+```
+
+The measure command undistorts the photo, finds the bolt, and scales it from the 3.0 mm square in that photo. Put the weights at `models/maskrcnn_bolt.pth`.
+
+Download: https://drive.google.com/file/d/1-PsKevRXKI-9Jyr2yQLZASatWYW5CLN8/view?usp=sharing
+
+SHA-256: `f89d6a8a3e9249c23e95732cf942faefc1a87faf09ef7b06f2fe72c38f5a8ee8`
 
 ## Calibration board
 
