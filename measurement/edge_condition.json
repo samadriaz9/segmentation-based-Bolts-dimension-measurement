@@ -1,0 +1,171 @@
+{
+  "rows": [
+    {
+      "file": "6mm_bolt_020.png",
+      "border_gap": 0.0,
+      "band": "touching the border",
+      "abs_error_mm": 0.3077,
+      "clipped_by_model": false
+    },
+    {
+      "file": "7mm_bolt_005.png",
+      "border_gap": 0.0,
+      "band": "touching the border",
+      "abs_error_mm": 0.1386,
+      "clipped_by_model": true
+    },
+    {
+      "file": "7mm_bolt_007.png",
+      "border_gap": 0.0,
+      "band": "touching the border",
+      "abs_error_mm": 2.5794,
+      "clipped_by_model": true
+    },
+    {
+      "file": "8mm_bolt_023.png",
+      "border_gap": 0.0,
+      "band": "touching the border",
+      "abs_error_mm": 0.0756,
+      "clipped_by_model": false
+    },
+    {
+      "file": "7mm_bolt_010.png",
+      "border_gap": 0.0,
+      "band": "touching the border",
+      "abs_error_mm": 0.1835,
+      "clipped_by_model": true
+    },
+    {
+      "file": "8mm_bolt_005.png",
+      "border_gap": 0.0,
+      "band": "touching the border",
+      "abs_error_mm": 1.0572,
+      "clipped_by_model": true
+    },
+    {
+      "file": "8mm_bolt_019.png",
+      "border_gap": 0.0,
+      "band": "touching the border",
+      "abs_error_mm": 0.4138,
+      "clipped_by_model": true
+    },
+    {
+      "file": "8mm_bolt_013.png",
+      "border_gap": 0.0147,
+      "band": "within 5 percent of the border",
+      "abs_error_mm": 0.0415,
+      "clipped_by_model": false
+    },
+    {
+      "file": "8mm_bolt_008.png",
+      "border_gap": 0.0236,
+      "band": "within 5 percent of the border",
+      "abs_error_mm": 0.075,
+      "clipped_by_model": false
+    },
+    {
+      "file": "8mm_bolt_017.png",
+      "border_gap": 0.0425,
+      "band": "within 5 percent of the border",
+      "abs_error_mm": 0.0815,
+      "clipped_by_model": false
+    },
+    {
+      "file": "7mm_bolt_002.png",
+      "border_gap": 0.046,
+      "band": "within 5 percent of the border",
+      "abs_error_mm": 0.1889,
+      "clipped_by_model": false
+    },
+    {
+      "file": "7mm_bolt_020.png",
+      "border_gap": 0.0558,
+      "band": "clear of the border",
+      "abs_error_mm": 0.2143,
+      "clipped_by_model": false
+    },
+    {
+      "file": "8mm_bolt_016.png",
+      "border_gap": 0.0582,
+      "band": "clear of the border",
+      "abs_error_mm": 0.0826,
+      "clipped_by_model": false
+    },
+    {
+      "file": "6mm_bolt_018.png",
+      "border_gap": 0.0662,
+      "band": "clear of the border",
+      "abs_error_mm": 0.4009,
+      "clipped_by_model": false
+    },
+    {
+      "file": "7mm_bolt_019.png",
+      "border_gap": 0.0682,
+      "band": "clear of the border",
+      "abs_error_mm": 0.5019,
+      "clipped_by_model": false
+    },
+    {
+      "file": "6mm_bolt_010.png",
+      "border_gap": 0.0889,
+      "band": "clear of the border",
+      "abs_error_mm": 0.3151,
+      "clipped_by_model": false
+    },
+    {
+      "file": "7mm_bolt_009.png",
+      "border_gap": 0.1224,
+      "band": "clear of the border",
+      "abs_error_mm": 0.1665,
+      "clipped_by_model": false
+    },
+    {
+      "file": "6mm_bolt_019.png",
+      "border_gap": 0.1316,
+      "band": "clear of the border",
+      "abs_error_mm": 0.3417,
+      "clipped_by_model": false
+    },
+    {
+      "file": "6mm_bolt_017.png",
+      "border_gap": 0.1445,
+      "band": "clear of the border",
+      "abs_error_mm": 0.5875,
+      "clipped_by_model": false
+    },
+    {
+      "file": "6mm_bolt_008.png",
+      "border_gap": 0.1978,
+      "band": "clear of the border",
+      "abs_error_mm": 0.4655,
+      "clipped_by_model": false
+    },
+    {
+      "file": "6mm_bolt_016.png",
+      "border_gap": 0.2093,
+      "band": "clear of the border",
+      "abs_error_mm": 0.4139,
+      "clipped_by_model": false
+    }
+  ],
+  "bands": [
+    {
+      "band": "touching the border",
+      "photos": 7,
+      "mean_abs_mm": 0.6794,
+      "worst_abs_mm": 2.5794
+    },
+    {
+      "band": "within 5 percent of the border",
+      "photos": 4,
+      "mean_abs_mm": 0.0967,
+      "worst_abs_mm": 0.1889
+    },
+    {
+      "band": "clear of the border",
+      "photos": 10,
+      "mean_abs_mm": 0.349,
+      "worst_abs_mm": 0.5875
+    }
+  ]
+}

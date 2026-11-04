@@ -6,7 +6,7 @@ height are both that distance, because the vernier was placed across opposite
 flats of the hexagon.
 
 The score threshold was chosen on the validation split and is not changed here.
-If the bolt is missing, or the square is missing, the command prints no measurement.
+If the bolt is missing, the square is missing, or the outline touches the frame, the command prints no measurement.
 
 Run:
     python inference/measure.py path\\to\\photo.png
@@ -30,6 +30,7 @@ WEIGHTS_PATH = ROOT / "models" / "maskrcnn_bolt.pth"
 OUTPUT_DIR = ROOT / "inference" / "outputs"
 SCORE_THRESHOLD = 0.95
 MASK_THRESHOLD = 0.5
+BORDER_MARGIN_PX = 2
 SQUARE_MM = 3.0
 MARKER_MM = 2.1
 NUM_CLASSES = 2
@@ -145,6 +146,18 @@ def find_bolt(model, image, device):
     return score, binary
 
 
+def mask_clipped(mask, margin=BORDER_MARGIN_PX):
+    """True when the outline meets the frame, so a flat may be cut off."""
+    if margin <= 0:
+        return False
+    return bool(
+        mask[:margin, :].any()
+        or mask[-margin:, :].any()
+        or mask[:, :margin].any()
+        or mask[:, -margin:].any()
+    )
+
+
 def flat_to_flat_px(mask):
     contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
     if not contours:
@@ -190,19 +203,34 @@ class Measurer:
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.model = load_model(self.device)
 
-    def measure_bgr(self, raw, apply_undistort=True):
+    def measure_bgr(self, raw, apply_undistort=True, refuse_clipped=True):
         image = undistort(raw, self.camera_matrix, self.dist_coeffs) if apply_undistort else raw
         found = find_bolt(self.model, image, self.device)
         if found is None:
             return {"ok": False, "reason": "object not found", "undistorted": image}
         confidence, mask = found
+        clipped = mask_clipped(mask)
+        if clipped and refuse_clipped:
+            return {
+                "ok": False,
+                "reason": "object clipped by frame",
+                "undistorted": image,
+                "confidence": confidence,
+                "clipped": True,
+            }
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         square_px = find_square_px(gray, self.board, self.detector)
         if square_px is None:
-            return {"ok": False, "reason": "reference not found", "undistorted": image, "confidence": confidence}
+            return {
+                "ok": False,
+                "reason": "reference not found",
+                "undistorted": image,
+                "confidence": confidence,
+                "clipped": clipped,
+            }
         flats_px, contour = flat_to_flat_px(mask)
         if flats_px is None:
-            return {"ok": False, "reason": "object not found", "undistorted": image}
+            return {"ok": False, "reason": "object not found", "undistorted": image, "clipped": clipped}
         flats_mm = pixels_to_mm(flats_px, square_px)
         overlay = draw_overlay(image, contour, flats_mm, flats_mm, confidence)
         return {
@@ -213,6 +241,7 @@ class Measurer:
             "square_px": square_px,
             "overlay": overlay,
             "undistorted": image,
+            "clipped": clipped,
         }
 
 
@@ -222,7 +251,8 @@ def measure(image_path, output_path, measurer=None):
         return fail(f"unreadable image {image_path}", 1)
     result = (measurer or Measurer()).measure_bgr(raw)
     if not result["ok"]:
-        return fail(result["reason"], 2 if result["reason"] == "object not found" else 3)
+        codes = {"object not found": 2, "reference not found": 3, "object clipped by frame": 4}
+        return fail(result["reason"], codes.get(result["reason"], 4))
     output_path.parent.mkdir(parents=True, exist_ok=True)
     cv2.imwrite(str(output_path), result["overlay"])
     print(f"width_mm {result['width_mm']:.3f}")

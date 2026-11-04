@@ -4,9 +4,9 @@ Written before implementation. A line is done only when the evidence beside it e
 
 - [x] Reprojection error reported, with the calibration image count. Evidence: 1.2318 px on 40 frames, `calibration/camera_params.npz`.
 - [x] Camera matrix and distortion coefficients load from a saved file. Evidence: `inference/measure.py` `load_camera` reads `calibration/camera_params.npz`.
-- [ ] A straight edge in a calibration image stays straight after undistortion. Evidence:
+- [x] A straight edge in a calibration image stays straight after undistortion. Evidence: `calibration/check_straight.py`. Mean distance of a board row from a straight line, 20 views: 1.0376 px raw, 0.9417 px undistorted. `calib_005.png` falls from 2.4956 px to 0.4414 px. Image: `calibration/undistort_check/calib_005_raw_and_undistorted.png`.
 - [ ] 70 or more images taken with this microscope, undistorted, with bolt and washer masks. Evidence: 72 images and 72 bolt masks in `dataset/images` and `dataset/labels`. There is no washer. The reference is the 3.0 mm square. A separate undistorted copy of the dataset was not saved.
-- [ ] Train / val / test file list committed before training. Split 70 / 20 / 10, seed 42. Evidence: the lists are 51 / 15 / 6. Git history does not show them committed before the training code.
+- [ ] Train / val / test file list committed before training. Split 70 / 20 / 10, seed 42. Evidence: 51 / 15 / 6 images, which is 70.8% / 20.8% / 8.3% of the 72 photos. The 70/20/10 figure is that ratio, not a count of 70, 20, and 10 images. Git history does not show the lists committed before the training code.
 - [ ] Test split unused for training, tuning, and checkpoint selection. Evidence: `models/train_maskrcnn.py` scores `dataset/test.txt` only after the checkpoint and the threshold are chosen on validation. The commit history does not prove that order.
 - [x] Test metrics reported: mask IoU, mAP@0.5, mAP@0.5:0.95, precision, recall. Evidence: `models/test_metrics.json`, mask IoU 0.963, mAP@0.5 1.0, mAP@0.5:0.95 0.9693, precision 1.0, recall 1.0.
 - [x] One command takes a new image and prints width (mm), height (mm), and confidence, and saves a mask overlay. Evidence: `python inference/measure.py path\to\photo.png`.
@@ -19,9 +19,8 @@ Written before implementation. A line is done only when the evidence beside it e
 
 Unfinished:
 
-- A saved before-and-after image showing a straight edge after undistortion.
 - Washer masks. The plan uses the ChArUco square instead.
-- Proof in git that the split lists were committed before training. The lists are 51/15/6, not a strict 70/20/10.
-- Item 8. No measured series for tilt, distance, lighting, or the object moving toward the edge.
-- Item 9. The command refuses a missing bolt or a missing square. It does not refuse a low-trust outline, and there is no count of refused photos.
-- `requirements.txt` is missing. The weights file is 176 MB, so GitHub will not store it. Download it from https://drive.google.com/file/d/1-PsKevRXKI-9Jyr2yQLZASatWYW5CLN8/view?usp=sharing into `models/maskrcnn_bolt.pth`. SHA-256 is in `models/config.json`.
+- Proof in git that the split lists were committed before the training code. The ratio of the 72 photos is 70.8% / 20.8% / 8.3%.
+- The branch is `main`. The assessment asks for `dev-test01` and a pull request into `main`. The existing history cannot be reordered without rewriting commits that are already on GitHub.
+- MO-1 is still missed after the clipped-outline rule. The 16 photos the command answers have a mean absolute error of 0.2663 mm.
+- The weights file is 176 MB, so GitHub will not store it. Download it from https://drive.google.com/file/d/1-PsKevRXKI-9Jyr2yQLZASatWYW5CLN8/view?usp=sharing into `models/maskrcnn_bolt.pth`. SHA-256 is in `models/config.json`.

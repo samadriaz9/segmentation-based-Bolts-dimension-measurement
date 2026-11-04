@@ -61,3 +61,21 @@ Same 14 photos with undistortion skipped: mean absolute error 0.2724 mm, median 
 ### MO-2 result: met
 
 `models/test_metrics.json`, six test images, score threshold 0.95 chosen on validation: mask IoU 0.963, mAP@0.5 1.0, mAP@0.5:0.95 0.9693, precision 1.0, recall 1.0. The target was 0.90.
+
+## Edge of the frame
+
+The condition is the bolt near the edge. `measurement/edge_condition.py` orders the same 21 undistorted errors by the gap from the labelled outline to the border.
+
+| Gap | Photos | Mean absolute error | Worst |
+|---|---:|---:|---:|
+| Touching the border | 7 | 0.6794 mm | 2.5794 mm |
+| Within 5 percent of the border | 4 | 0.0967 mm | 0.1889 mm |
+| Clear of the border | 10 | 0.3490 mm | 0.5875 mm |
+
+Being close is not what breaks the measurement. The error jumps when the outline is cut by the frame. `7mm_bolt_007.png` is the worst, 4.421 mm against a 7.0 mm caliper. Photos that are clear of the border still miss 0.25 mm, because the 6 mm bolts read low even when the whole hexagon is inside the frame.
+
+## Refusing a clipped outline
+
+The command refuses when the predicted mask comes within 2 pixels of the frame. On these 21 photos that rule refuses 5: `7mm_bolt_005.png`, `7mm_bolt_007.png`, `7mm_bolt_010.png`, `8mm_bolt_005.png`, and `8mm_bolt_019.png`. The other 16 are still answered. Their mean absolute error is 0.2663 mm, median 0.2610 mm, worst 0.5875 mm. The cost is 5 refused photos. The rule removes the 2.5794 mm error and does not bring the mean under 0.25 mm.
+
+`dataset/images/7mm_bolt_007.png` prints `object clipped by frame`, prints no millimetres, and exits 4.

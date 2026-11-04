@@ -20,7 +20,7 @@ Status: calibration, 72 labelled images, a fine-tuned Mask R-CNN, and a measure 
 
 ## Dataset
 
-72 microscope photos, 1280×720, 24 each of the 6 mm, 7 mm, and 8 mm bolts. Labels are polygon masks of the bolt. Split lists: 51 train, 15 validation, 6 test.
+72 microscope photos, 1280×720, 24 each of the 6 mm, 7 mm, and 8 mm bolts. Labels are polygon masks of the bolt. The split ratio is 70.8% / 20.8% / 8.3%: 51 train, 15 validation, 6 test.
 
 ## Run
 
@@ -30,6 +30,8 @@ python models/train_maskrcnn.py
 python inference/measure.py path\to\photo.png
 python measurement/accuracy.py
 ```
+
+Library versions are pinned in `requirements.txt`. The measure command prints no millimetres when the bolt is missing, the square is missing, or the outline touches the frame.
 
 The measure command undistorts the photo, finds the bolt, and scales it from the 3.0 mm square in that photo. Put the weights at `models/maskrcnn_bolt.pth`.
 

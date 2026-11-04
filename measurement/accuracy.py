@@ -67,7 +67,7 @@ def record(measurer, path, truth, apply_undistort):
     image = cv2.imread(str(path))
     if image is None:
         return {"ok": False, "reason": "unreadable image"}
-    result = measurer.measure_bgr(image, apply_undistort=apply_undistort)
+    result = measurer.measure_bgr(image, apply_undistort=apply_undistort, refuse_clipped=False)
     row = {
         "file": path.name,
         "caliper_mm": truth,
@@ -75,6 +75,7 @@ def record(measurer, path, truth, apply_undistort):
     }
     if not result["ok"]:
         row["reason"] = result["reason"]
+        row["clipped"] = bool(result.get("clipped", False))
         return row
     width = float(result["width_mm"])
     error = width - truth
@@ -86,6 +87,7 @@ def record(measurer, path, truth, apply_undistort):
         "error_mm": round(error, 4),
         "abs_error_mm": round(abs(error), 4),
         "abs_pct": round(abs(error) / truth * 100.0, 4),
+        "clipped": bool(result.get("clipped", False)),
     })
     return row
 
@@ -145,6 +147,9 @@ def main():
         "summary_test_undistorted": summarise([row for row in undistorted if row["split"] == "test"]),
         "summary_undistorted_in_frame": summarise([row for row in undistorted if not row["cut_by_border"]]),
         "summary_raw_in_frame": summarise([row for row in raw if not row["cut_by_border"]]),
+        "summary_unclipped": summarise([row for row in undistorted if not row.get("clipped")]),
+        "clipped_count": sum(1 for row in undistorted if row.get("clipped")),
+        "border_margin_px": 2,
     }
     OUTPUT_PATH.write_text(json.dumps(payload, indent=2), encoding="utf-8")
     print(json.dumps({

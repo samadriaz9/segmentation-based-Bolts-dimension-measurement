@@ -1,0 +1,9 @@
+{
+  "views": 20,
+  "mean_row_error_raw_px": 1.0376,
+  "mean_row_error_undistorted_px": 0.9417,
+  "example": "calib_005.png",
+  "example_raw_px": 2.4956,
+  "example_undistorted_px": 0.4414,
+  "image": "calibration/undistort_check/calib_005_raw_and_undistorted.png"
+}
